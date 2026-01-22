@@ -1,1 +1,13 @@
-{}
+{
+  "name": "playwright-qa-suite",
+  "version": "1.0.0",
+  "description": "End-to-end and regression test suite built with Playwright.",
+  "scripts": {
+    "test": "npx playwright test",
+    "report": "npx playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.42.0"
+  }
+}
+
