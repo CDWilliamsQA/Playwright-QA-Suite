@@ -64,5 +64,3 @@ Independent QA Engineer | Automation Specialist | Theoretical Researcher
 (Built as part of ongoing QA upskilling and CI/CD framework development.)
 
 📘 Framework setup in progress — initial Playwright CI pipeline being configured.
-
-✅ That’s it — one continuous README, icons included, 100 % ready to paste directly into GitHub with no extra wrapping or code fences.
