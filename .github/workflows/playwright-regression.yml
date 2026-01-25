@@ -1,4 +1,4 @@
-name: Playwright Regression Suite
+name: Playwright - Regression
 
 on:
   push:
@@ -8,41 +8,39 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-playwright-tests:
+  regression:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "18"
           cache: "npm"
 
-      - name: Install dependencies
+      - name: Install deps
         run: npm ci
 
-      - name: Install Playwright browsers
+      - name: Install browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests
+      - name: Run regression tests
         env:
           CI: "true"
-        run: npx playwright test
+        run: npx playwright test tests/regression
 
-      # Upload reports even if tests fail
-      - name: Upload Playwright HTML report
+      - name: Upload HTML report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report
+          name: playwright-report-regression
           path: playwright-report/
 
       - name: Upload JUnit results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: junit-results
+          name: junit-results-regression
           path: results.xml
