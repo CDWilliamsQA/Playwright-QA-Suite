@@ -1,14 +1,26 @@
-name: Playwright Regression Tests
+name: Playwright Regression Suite
 
 on:
   push:
     branches: [main]
+    paths:
+      - "tests/regression/**"
+      - ".github/workflows/playwright-regression.yml"
+      - "package.json"
+      - "package-lock.json"
+      - "playwright.config.ts"
   pull_request:
     branches: [main]
+    paths:
+      - "tests/regression/**"
+      - ".github/workflows/playwright-regression.yml"
+      - "package.json"
+      - "package-lock.json"
+      - "playwright.config.ts"
   workflow_dispatch:
 
 jobs:
-  regression:
+  run-regression-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,18 +41,12 @@ jobs:
       - name: Run Regression tests
         env:
           CI: "true"
-        run: npx playwright test tests/regression
+        run: npx playwright test tests/regression --reporter=html
 
+      # Upload reports even if tests fail
       - name: Upload Playwright HTML report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report-regression
+          name: playwright-regression-report
           path: playwright-report/
-
-      - name: Upload JUnit results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: junit-results-regression
-          path: results.xml
