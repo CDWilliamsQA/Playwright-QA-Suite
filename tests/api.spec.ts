@@ -1,4 +1,4 @@
-import { test, expect } from @'playwright/tests';
+import { test, expect } from @'playwright/test';
 
 test.describe('API Validation', () => {
   test('GET request to verify API status', async ({ request }) => {
