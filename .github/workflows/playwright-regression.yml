@@ -1,4 +1,4 @@
-name: Playwright - Regression
+name: Playwright Regression Tests
 
 on:
   push:
@@ -10,28 +10,29 @@ on:
 jobs:
   regression:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "18"
           cache: "npm"
 
-      - name: Install deps
-        run: npm ci
+      - name: Install dependencies
+        run: npm install
 
-      - name: Install browsers
+      - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run regression tests
+      - name: Run Regression tests
         env:
           CI: "true"
         run: npx playwright test tests/regression
 
-      - name: Upload HTML report
+      - name: Upload Playwright HTML report
         if: always()
         uses: actions/upload-artifact@v4
         with:
