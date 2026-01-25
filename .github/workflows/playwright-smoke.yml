@@ -1,46 +1,51 @@
-name: Playwright - Smoke
+name: Playwright Smoke Suite
 
 on:
   push:
     branches: [main]
+    paths:
+      - "tests/smoke/**"
+      - ".github/workflows/playwright-smoke.yml"
+      - "package.json"
+      - "package-lock.json"
+      - "playwright.config.ts"
   pull_request:
     branches: [main]
+    paths:
+      - "tests/smoke/**"
+      - ".github/workflows/playwright-smoke.yml"
+      - "package.json"
+      - "package-lock.json"
+      - "playwright.config.ts"
   workflow_dispatch:
 
 jobs:
-  smoke:
+  run-smoke-tests:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "18"
-          cache: "npm"
 
-      - name: Install deps
-        run: npm ci
+      - name: Install dependencies
+        run: npm install
 
-      - name: Install browsers
+      - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run smoke tests
+      - name: Run Smoke tests
         env:
           CI: "true"
-        run: npx playwright test tests/smoke
+        run: npx playwright test tests/smoke --reporter=html
 
-      - name: Upload HTML report
+      - name: Upload Playwright HTML report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report-smoke
+          name: playwright-smoke-report
           path: playwright-report/
-
-      - name: Upload JUnit results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: junit-results-smoke
-          path: results.xml
