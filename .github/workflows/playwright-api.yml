@@ -28,7 +28,7 @@ jobs:
       - name: Run API tests
         env:
           CI: "true"
-        run: npx playwright test tests/api
+        run: npx playwright test --config=playwright.api.config.ts
 
       - name: Upload HTML report
         if: always()
