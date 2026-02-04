@@ -1,47 +1,63 @@
 # 🎭 Playwright QA Framework
 
-Automated QA test framework built with **Playwright** to demonstrate **professional automation practices** with **GitHub Actions CI/CD**.
+Automated QA test framework built with **Playwright** to demonstrate **professional automation practices** integrated with **GitHub Actions CI/CD**.
 
-This repo contains three separate suites (**Smoke**, **Regression**, **API**) and produces both **HTML** and **JUnit** reports locally and in CI.
+This repository contains three separate test suites (**Smoke**, **Regression**, **API**) and generates both **HTML** and **JUnit XML** reports locally and in CI pipelines.
 
 ---
 
 ## 🧰 Features
 
-- ✅ Playwright test runner (cross-browser capable via config)
-- ✅ Separate suites: **Smoke / Regression / API**
-- ✅ HTML report output + **JUnit XML** for CI visibility
-- ✅ GitHub Actions workflows per suite
-- ✅ Scalable folder structure for growing coverage
+- Playwright test runner (cross-browser ready via config)
+- Structured test suites: **Smoke / Regression / API**
+- HTML test reports
+- JUnit XML output for CI visibility
+- GitHub Actions workflows per suite
+- Scalable folder structure for expanding coverage
+- Demonstrates real-world automation engineering practices
 
 ---
 
 ## 📦 Prerequisites
 
 - **Node.js 18+**
-- Playwright browsers installed (handled automatically in CI; one-time install locally)
+- Playwright browsers (installed automatically in CI and during local setup)
 
 ---
 
 ## 🚀 Getting Started (Local)
 
-### 1) Install dependencies
+### 1. Install dependencies
+
 ```bash
 npm install
-
 npx playwright install
+```
 
-# Smoke
+### 2. Run test suites
+
+```bash
+# Smoke suite
 npx playwright test tests/smoke
 
-# Regression
+# Regression suite
 npx playwright test tests/regression
 
-# API
+# API suite
 npx playwright test tests/api
+```
 
+### 3. View HTML report
+
+```bash
 npx playwright show-report
+```
 
+---
+
+## 📁 Project Structure
+
+```
 .
 ├── tests/
 │ ├── api/
@@ -58,26 +74,44 @@ npx playwright show-report
 │ └── CI/
 │ └── CI_debug_log.md
 └── README.md
+```
 
-⚙️ CI/CD (GitHub Actions)
-This repository includes three GitHub Actions workflows, one per suite:
-API Suite (playwright-api.yml)
-Regression Suite (playwright-regression.yml)
-Smoke Suite (playwright-smoke.yml)
-Each workflow will:
-Install dependencies
-Install Playwright browsers
-Run the suite
-Upload HTML report (playwright-report/) as an artifact
-Upload JUnit XML (results.xml) as an artifact
-Viewing CI results
-Go to the Actions tab in GitHub
-Select a workflow run (API / Regression / Smoke)
-Download artifacts from the run summary:
-playwright-report
-junit-results
+---
 
-🧑‍💻 Author
-C. D. Williams
-Independent QA Engineer | Automation Specialist
-Built as part of ongoing QA upskilling and CI/CD framework development.
+## ⚙️ CI/CD (GitHub Actions)
+
+This repository includes **three GitHub Actions workflows**, one per suite:
+
+| Suite | Workflow File |
+|------|---------------|
+| API | `playwright-api.yml` |
+| Regression | `playwright-regression.yml` |
+| Smoke | `playwright-smoke.yml` |
+
+### Each workflow performs:
+
+- Install dependencies  
+- Install Playwright browsers  
+- Run the test suite  
+- Upload **HTML report** (`playwright-report/`) as an artifact  
+- Upload **JUnit XML** (`results.xml`) as an artifact  
+
+---
+
+## 📊 Viewing CI Results
+
+1. Go to the **Actions** tab on GitHub  
+2. Select a workflow run (API / Regression / Smoke)  
+3. Download artifacts from the run summary:
+
+   - `playwright-report`
+   - `junit-results`
+
+---
+
+## 🧑‍💻 Author
+
+**C. D. Williams**
+
+QA Automation Engineer  
+Demonstrating scalable, CI-ready automation frameworks.
